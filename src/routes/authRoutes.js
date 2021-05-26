@@ -5,7 +5,7 @@ const router = express.Router();
 const User = mongoose.model("User");
 
 router.post("/signup", async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const { email, password, phone } = req.body;
     try {
         const user = new User({ email, password, phone });
@@ -29,7 +29,7 @@ router.post("/signin", async (req, res) => {
     try {
         await user.comparePassword(password);
         const token = jwt.sign({ userId: user._id }, "MY_SECRET_KEY");
-        res.send({ token });
+        res.send({ token, user });
     } catch (err) {
         return res.status(422).send({ error: "Invalid password" });
     }

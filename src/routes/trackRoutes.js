@@ -6,10 +6,14 @@ const Track = mongoose.model("Track");
 const router = express.Router();
 router.use(requireAuth);
 
+router.get("/getdetails", async (req, res) => {
+    console.log(req.user);
+    res.send(req.user);
+});
+
 router.get("/tracks", async (req, res) => {
     console.log("Req is ", req.user);
     const tracks = await Track.find({ userId: req.user._id });
-
     res.send(tracks);
 });
 
