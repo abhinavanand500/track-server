@@ -26,7 +26,7 @@ mongoose.connection.on("error", () => {
 app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(trackRoutes);
-// app.use(detailRoutes);
+app.use(detailRoutes);
 
 app.get("/", requireAuth, (req, res) => {
     res.send(`Your email is ${req.user.email}`);

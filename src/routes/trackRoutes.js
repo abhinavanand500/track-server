@@ -7,7 +7,7 @@ const router = express.Router();
 router.use(requireAuth);
 
 router.get("/getdetails", async (req, res) => {
-    console.log(req.user);
+    console.log("Hiii user info", req.user);
     res.send(req.user);
 });
 
