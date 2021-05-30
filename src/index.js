@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const authRoutes = require("./routes/authRoutes");
 const trackRoutes = require("./routes/trackRoutes");
+const detailRoutes = require("./routes/detailRoutes");
 const mongoURI =
     "mongodb+srv://abhinav:abhinav@locationtracker.smw1h.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
@@ -25,6 +26,7 @@ mongoose.connection.on("error", () => {
 app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(trackRoutes);
+// app.use(detailRoutes);
 
 app.get("/", requireAuth, (req, res) => {
     res.send(`Your email is ${req.user.email}`);

@@ -14,6 +14,15 @@ const userSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    distance:{
+        type: Number,
+        required: false,
+    },
+    name:{
+        type: String,
+        required: false,
+    },
+    
 });
 
 userSchema.pre("save", function (next) {
