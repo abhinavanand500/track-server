@@ -35,4 +35,15 @@ router.post("/signin", async (req, res) => {
     }
 });
 
+router.post("/sendMessage",async (req,res)=>{
+    // const { email, password, phone } = req.body;
+    console.log("hii from ", req.body)
+    // API_KEY="kYC8XGxNcTKrBMwDIUm5Fq23buhvS41jyWlgsd67QfRJPzZeEAbjWY9mOcy5zKe4N6UhsVXnwFl7tgpS";
+    // mg="ghjgjgjjgjgjggjgjg";
+    // const response = await fast2sms.sendMessage({authorization : API_KEY,
+    //                     message:msg,
+    //                     numbers:[phone]});
+    res.send("Hii");
+});
+
 module.exports = router;
