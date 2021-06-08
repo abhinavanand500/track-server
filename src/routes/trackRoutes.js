@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const unirest = require("unirest");
 const requireAuth = require("../middlewares/requireAuth");
 const Track = mongoose.model("Track");
 
@@ -31,6 +32,42 @@ router.post("/tracks", async (req, res) => {
     } catch (err) {
         res.status(422).send({ error: err.message });
     }
+});
+
+router.post("/sendMessage", async (req, res) => {
+    // const lat = req.body.currentLocation.coords.latitude;
+    // const long = req.body.currentLocation.coords.longitude;
+    const dist = req.body.dist;
+
+    const API =
+        "pJ1UjN0nVPm4Tl7tWHC3xoXgqf96zSiQ8cMDdsIyReZEwvBKaLpyo9OcuFq0NWSmCQnx526ZGAs8rThb";
+    const link =
+        "http://www.google.com/maps/place/" +
+        req.body.currentLocation.coords.latitude +
+        "," +
+        req.body.currentLocation.coords.longitude;
+    const re = unirest("POST", "https://www.fast2sms.com/dev/bulkV2");
+
+    re.headers({
+        authorization: API,
+    });
+
+    re.form({
+        message:
+            "The patient is outside safe area. The distance between starting position and his current location is : " +
+            dist +
+            " km. You can track the patient's location using following link " +
+            link,
+        language: "english",
+        route: "q",
+        numbers: req.user.phone,
+    });
+
+    re.end(function (res) {
+        if (res.error) throw new Error(res.error);
+
+        console.log(res.body);
+    });
 });
 
 module.exports = router;
