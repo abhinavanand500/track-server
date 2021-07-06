@@ -66,7 +66,7 @@ router.post("/sendMessage", async (req, res) => {
     re.end(function (res) {
         if (res.error) throw new Error(res.error);
 
-        console.log(res.body);
+        console.log("Why", res.body);
     });
 });
 
